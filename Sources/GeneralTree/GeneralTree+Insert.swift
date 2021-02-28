@@ -1,10 +1,10 @@
 import Tree
 
 public protocol HasRoot {
-  static var root: Self {get set}
+  static var root: Self { get set }
 }
 
-public extension GeneralTree where Children == Forest<Element>, Element: Equatable, Element: HasRoot {
+public extension GeneralTree where Descendent == Forest<Element>, Element: Equatable, Element: HasRoot {
   mutating func inserting(_ path: LinkedList<Element>) {
     self = insert(path)
   }
@@ -13,7 +13,7 @@ public extension GeneralTree where Children == Forest<Element>, Element: Equatab
     switch path {
     case .empty:
       return self
-    case .node(value: let firstInput, _):
+    case let .node(value: firstInput, _):
       switch self {
       case .empty:
         return Tree(path)
@@ -27,32 +27,31 @@ public extension GeneralTree where Children == Forest<Element>, Element: Equatab
         children.forest.insert(updatedTree, at: index)
         return .node(value: .root, children)
       case .node(value: firstInput, var children):
-        let subtree = Tree(path.next ?? .empty)
+        let subtree = Tree(path.next)
         children.forest.append(contentsOf: subtree == .empty ? [] : [subtree])
         return .node(value: firstInput, children)
       case .node:
-        return .node(value: .root, Children([self] + [Tree(path)]))
+        return .node(value: .root, Descendent([self] + [Tree(path)]))
       }
     }
   }
 
   init(_ paths: [LinkedList<Element>]) {
     var tree = Self.empty
-    paths.forEach{ tree.inserting($0) }
+    paths.forEach { tree.inserting($0) }
     self = tree
   }
 }
 
-public extension GeneralTree where Children == Forest<Element>, Element: Equatable{
+public extension GeneralTree where Descendent == Forest<Element>, Element: Equatable {
   func linkedLists(_ path: LinkedList<Element> = .empty) -> [LinkedList<Element>] {
-    switch self{
+    switch self {
     case .empty:
       return []
-    case .node(value: let value, .noDescendent):
+    case let .node(value: value, .noDescendent):
       return [path.insert(value)]
     case let .node(value: value, children):
-      return children.forest.flatMap{$0.linkedLists(path.insert(value))}
+      return children.forest.flatMap { $0.linkedLists(path.insert(value)) }
     }
   }
 }
-

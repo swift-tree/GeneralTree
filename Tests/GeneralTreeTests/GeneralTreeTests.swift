@@ -1,6 +1,6 @@
-import XCTest
 import GeneralTree
 import Tree
+import XCTest
 
 extension Int: HasRoot {
   public static var root = Int.max
@@ -10,18 +10,18 @@ final class GeneralTreeTests: XCTestCase {
   private typealias GeneralTreeInt = GeneralTree<Int>
   private var tree: GeneralTreeInt!
   private var capturedItems: [Int]!
-  
+
   override func setUp() {
     super.setUp()
 
     tree = .empty
     capturedItems = []
   }
-  
+
   override func tearDown() {
     tree = nil
     capturedItems = nil
-    
+
     super.tearDown()
   }
 
@@ -51,11 +51,12 @@ final class GeneralTreeTests: XCTestCase {
 
     XCTAssertEqual(
       tree,
-      .node(value: Int.max,
-            .init(
-              .node(value: 1,  .init(.node(value: 3, .noDescendent))),
-              .node(value: 2, .noDescendent)
-            )
+      .node(
+        value: Int.max,
+        .init(
+          .node(value: 1, .init(.node(value: 3, .noDescendent))),
+          .node(value: 2, .noDescendent)
+        )
       )
     )
   }
@@ -65,11 +66,12 @@ final class GeneralTreeTests: XCTestCase {
 
     XCTAssertEqual(
       newTree,
-      .node(value: Int.max,
-            .init(
-              .node(value: 1, .init(.node(value: 3, .noDescendent))),
-              .node(value: 2, .init(.node(value: 3, .noDescendent)))
-            )
+      .node(
+        value: Int.max,
+        .init(
+          .node(value: 1, .init(.node(value: 3, .noDescendent))),
+          .node(value: 2, .init(.node(value: 3, .noDescendent)))
+        )
       )
     )
   }
@@ -81,11 +83,12 @@ final class GeneralTreeTests: XCTestCase {
 
     XCTAssertEqual(
       newTree,
-      .node(value: Int.max,
-            .init(
-              .node(value: 1, .init(.node(value: 3, .noDescendent))),
-              .node(value: 2, .init(.node(value: 3, .noDescendent)))
-            )
+      .node(
+        value: Int.max,
+        .init(
+          .node(value: 1, .init(.node(value: 3, .noDescendent))),
+          .node(value: 2, .init(.node(value: 3, .noDescendent)))
+        )
       )
     )
   }
@@ -97,11 +100,12 @@ final class GeneralTreeTests: XCTestCase {
 
     XCTAssertEqual(
       newTree,
-      .node(value: Int.max,
-            .init(
-              .init([1, 3]),
-              .init([2, 3])
-            )
+      .node(
+        value: Int.max,
+        .init(
+          .init([1, 3]),
+          .init([2, 3])
+        )
       )
     )
   }
@@ -112,11 +116,12 @@ final class GeneralTreeTests: XCTestCase {
 
     XCTAssertEqual(
       newTree,
-      .node(value: Int.max,
-            .init(
-              .init([1, 3]),
-              .init([2, 3])
-            )
+      .node(
+        value: Int.max,
+        .init(
+          .init([1, 3]),
+          .init([2, 3])
+        )
       )
     )
   }
@@ -127,11 +132,12 @@ final class GeneralTreeTests: XCTestCase {
 
     XCTAssertEqual(
       tree,
-      .node(value: Int.max,
-            .init(
-              .init([1, 3]),
-              .init([2, 3])
-            )
+      .node(
+        value: Int.max,
+        .init(
+          .init([1, 3]),
+          .init([2, 3])
+        )
       )
     )
   }
@@ -153,15 +159,17 @@ final class GeneralTreeTests: XCTestCase {
 
     XCTAssertEqual(
       tree,
-      .node(value: 1,
-            .init(.node(value: 2,
-                        .init(.node(value: 3, .noDescendent)
-                        ))
-            )
+      .node(
+        value: 1,
+        .init(.node(
+          value: 2,
+          .init(.node(value: 3, .noDescendent)
+          )
+        )
+        )
       )
     )
   }
-
 
   func test_insert_different_vectors() {
     var newTree = tree.insert(.node(value: 1, .init(.leaf(2)))).insert(.node(value: 3, .init(.leaf(4))))
@@ -171,7 +179,8 @@ final class GeneralTreeTests: XCTestCase {
       .node(value: Int.max, .init(
         .node(value: 1, .init(.leaf(2))),
         .node(value: 3, .init(.leaf(4)))
-      )))
+      ))
+    )
 
     newTree = newTree.insert(.node(value: 5, .init(.leaf(6))))
 
@@ -181,7 +190,8 @@ final class GeneralTreeTests: XCTestCase {
         .node(value: 1, .init(.leaf(2))),
         .node(value: 3, .init(.leaf(4))),
         .node(value: 5, .init(.leaf(6)))
-      )))
+      ))
+    )
   }
 
   func test_traversals_preOrder() {
@@ -189,11 +199,11 @@ final class GeneralTreeTests: XCTestCase {
       value: 1,
       .init(.leaf(11), .leaf(12), .leaf(13))
     )
-    
+
     tree.traverse(method: .preOrder) { [weak self] value, _ in
       self?.capturedItems.append(value)
     }
-    
+
     XCTAssertEqual(capturedItems, [1, 11, 12, 13])
   }
 
@@ -214,7 +224,7 @@ final class GeneralTreeTests: XCTestCase {
     tree.traverse(method: .postOrder) { [weak self] value, _ in
       self?.capturedItems.append(value)
     }
-    
+
     XCTAssertEqual(capturedItems, [11, 12, 13, 1])
   }
 
@@ -231,7 +241,8 @@ final class GeneralTreeTests: XCTestCase {
             .leaf(12),
             .leaf(13)
           )
-        ))
+        )
+      )
     )
 
     XCTAssertEqual(
@@ -260,7 +271,8 @@ final class GeneralTreeTests: XCTestCase {
             .leaf(12),
             .leaf(13)
           )
-        ))
+        )
+      )
     )
 
     XCTAssertEqual(
@@ -276,7 +288,7 @@ final class GeneralTreeTests: XCTestCase {
   func test_linkedlists_tree_init() {
     XCTAssertEqual(GeneralTree(LinkedList([1])), .leaf(1))
     XCTAssertEqual(
-      GeneralTree(LinkedList([1,2,3])),
+      GeneralTree(LinkedList([1, 2, 3])),
       .node(
         value: 1,
         .init(
@@ -294,7 +306,6 @@ final class GeneralTreeTests: XCTestCase {
     )
   }
 
-
   func test_linkedlists_tree() {
     let searchingTree: GeneralTreeInt = .node(
       value: 12,
@@ -303,7 +314,8 @@ final class GeneralTreeTests: XCTestCase {
         .leaf(9),
         .leaf(8),
         .leaf(7)
-      ))
+      )
+    )
 
     tree = .node(
       value: 1,
@@ -318,14 +330,15 @@ final class GeneralTreeTests: XCTestCase {
             .leaf(13),
             .leaf(12)
           )
-        ))
+        )
+      )
     )
 
     XCTAssertEqual(
       tree.linkedLists(),
       [
-        .node(value: 1, .init(.node(value: 11, .init( .empty)))),
-        .node(value: 1, .init( .node(value: 12, .init( .empty)))), .node(value: 1, .init( .node(value: 2, .init( .node(value: 11, .init( .empty)))))), .node(value: 1, .init( .node(value: 2, .init( .node(value: 12, .init( .node(value: 0, .init( .empty)))))))), .node(value: 1, .init( .node(value: 2, .init( .node(value: 12, .init( .node(value: 9, .init( .empty)))))))), .node(value: 1, .init( .node(value: 2, .init( .node(value: 12, .init( .node(value: 8, .init( .empty)))))))), .node(value: 1, .init( .node(value: 2, .init( .node(value: 12, .init( .node(value: 7, .init( .empty)))))))), .node(value: 1, .init( .node(value: 2, .init( .node(value: 13, .init( .empty)))))), .node(value: 1, .init( .node(value: 2, .init( .node(value: 12, .init( .empty))))))
+        .node(value: 1, .init(.node(value: 11, .init(.empty)))),
+        .node(value: 1, .init(.node(value: 12, .init(.empty)))), .node(value: 1, .init(.node(value: 2, .init(.node(value: 11, .init(.empty)))))), .node(value: 1, .init(.node(value: 2, .init(.node(value: 12, .init(.node(value: 0, .init(.empty)))))))), .node(value: 1, .init(.node(value: 2, .init(.node(value: 12, .init(.node(value: 9, .init(.empty)))))))), .node(value: 1, .init(.node(value: 2, .init(.node(value: 12, .init(.node(value: 8, .init(.empty)))))))), .node(value: 1, .init(.node(value: 2, .init(.node(value: 12, .init(.node(value: 7, .init(.empty)))))))), .node(value: 1, .init(.node(value: 2, .init(.node(value: 13, .init(.empty)))))), .node(value: 1, .init(.node(value: 2, .init(.node(value: 12, .init(.empty)))))),
       ]
     )
   }
@@ -352,7 +365,8 @@ final class GeneralTreeTests: XCTestCase {
             .leaf(13),
             .leaf(12)
           )
-        ))
+        )
+      )
     )
 
     XCTAssertEqual(tree[[2, 1, 3]], 7)
@@ -380,10 +394,18 @@ final class GeneralTreeTests: XCTestCase {
             .leaf(13),
             .leaf(12)
           )
-        ))
+        )
+      )
     )
 
-    XCTAssertEqual(tree.remove(at: [2, 1, 3]), .leaf(7))
+    XCTAssertEqual(tree.remove(at: [2, 1, 3]), .node(
+      value: 12,
+      .init(
+        .leaf(0),
+        .leaf(9),
+        .leaf(8)
+      )
+    ))
   }
 
   func test_find_at_indices() {
@@ -408,7 +430,8 @@ final class GeneralTreeTests: XCTestCase {
             .leaf(13),
             .leaf(12)
           )
-        ))
+        )
+      )
     )
 
     XCTAssertEqual(tree.find(at: [2, 1, 3]), .leaf(7))
@@ -436,7 +459,8 @@ final class GeneralTreeTests: XCTestCase {
             .leaf(13),
             .leaf(12)
           )
-        ))
+        )
+      )
     )
 
     XCTAssertEqual(tree.find(at: [0]), .leaf(11))
@@ -464,7 +488,8 @@ final class GeneralTreeTests: XCTestCase {
             .leaf(13),
             .leaf(12)
           )
-        ))
+        )
+      )
     )
 
     XCTAssertEqual(tree.find(at: .empty), tree)
@@ -496,7 +521,8 @@ final class GeneralTreeTests: XCTestCase {
             .leaf(13),
             .leaf(12)
           )
-        ))
+        )
+      )
     )
 
     XCTAssertEqual(tree.find(at: [2, 1, 3]), .leaf(7))
@@ -524,7 +550,8 @@ final class GeneralTreeTests: XCTestCase {
             .leaf(13),
             .leaf(12)
           )
-        ))
+        )
+      )
     )
 
     XCTAssertEqual(

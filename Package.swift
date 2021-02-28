@@ -7,18 +7,21 @@ let package = Package(
   products: [
     .library(
       name: "GeneralTree",
-      targets: ["GeneralTree"]),
+      targets: ["GeneralTree"]
+    ),
   ],
   dependencies: [
     .package(path: "../Tree"),
-   // .package(url: "https://github.com/erkekin/Tree.git", .exact("0.1.7"))
+    // .package(url: "https://github.com/erkekin/Tree.git", .exact("0.1.7"))
   ],
   targets: [
     .target(
       name: "GeneralTree",
-      dependencies: ["Tree"]),
+      dependencies: ["Tree"]
+    ),
     .testTarget(
       name: "GeneralTreeTests",
-      dependencies: ["GeneralTree", "Tree"]),
+      dependencies: ["GeneralTree", "Tree"]
+    ),
   ]
 )
