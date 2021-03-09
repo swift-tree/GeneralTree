@@ -11,8 +11,7 @@ let package = Package(
     ),
   ],
   dependencies: [
-    .package(path: "../Tree"),
-    // .package(url: "https://github.com/erkekin/Tree.git", .exact("0.1.7"))
+    .package(url: "https://github.com/swift-tree/Tree.git", .exact("1.0.0")),
   ],
   targets: [
     .target(

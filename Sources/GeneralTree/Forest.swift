@@ -20,13 +20,13 @@ public struct Forest<T>: DescendentProtocol {
 
 public extension Forest {
   var height: Int {
-    forest.map { $0.height }.max() ?? 0
+    forest.map(\.height).max() ?? 0
   }
 }
 
 public extension ForestSet {
   var height: Int {
-    forest.map { $0.height }.max() ?? 0
+    forest.map(\.height).max() ?? 0
   }
 }
 

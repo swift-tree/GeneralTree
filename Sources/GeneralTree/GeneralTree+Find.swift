@@ -31,7 +31,7 @@ public extension GeneralTree where Descendent == Forest<Element>, Element: Equat
 
   func find(_ e: Element) -> Self {
     let subtrees = find(trees: e)
-    return subtrees.isEmpty ? .empty : .node(value: e, .init(subtrees.flatMap { $0.descentent?.forest ?? [] }))
+    return subtrees.isEmpty ? .empty : .node(value: e, .init(subtrees.flatMap { $0.descendent?.forest ?? [] }))
   }
 
   func find(at indices: LinkedList<Int>) -> Self {
