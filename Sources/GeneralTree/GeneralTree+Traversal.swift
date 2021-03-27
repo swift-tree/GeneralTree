@@ -5,7 +5,7 @@ public enum DepthFirstTraversal {
   case postOrder
 }
 
-public extension GeneralTree where Descendent == Forest<Element>, Element: Equatable {
+public extension GeneralTree where Descendent == Forest<Element> {
   func traverse(
     initialPath: LinkedList<Element> = .empty,
     method: DepthFirstTraversal,

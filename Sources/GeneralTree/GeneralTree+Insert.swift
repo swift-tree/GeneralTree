@@ -35,8 +35,10 @@ public extension GeneralTree where Descendent == Forest<Element>, Element: Equat
       }
     }
   }
+}
 
-  init(_ paths: [LinkedList<Element>]) {
+public extension GeneralTree where Descendent == Forest<Element>, Element: Equatable, Element: HasRoot {
+  init(paths: [LinkedList<Element>]) {
     var tree = Self.empty
     paths.forEach { tree.inserting($0) }
     self = tree

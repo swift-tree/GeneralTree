@@ -25,6 +25,21 @@ final class GeneralTreeTests: XCTestCase {
     super.tearDown()
   }
 
+  func test_init_paths() {
+    tree = GeneralTreeInt(paths: [[1], [2], [1, 3]])
+
+    XCTAssertEqual(
+      tree,
+      .node(
+        value: Int.max,
+        .init(
+          .node(value: 1, .init(.node(value: 3, .noDescendent))),
+          .node(value: 2, .noDescendent)
+        )
+      )
+    )
+  }
+
   func test_inserting_on_empty() {
     tree.inserting(.init([1]))
 
@@ -47,7 +62,10 @@ final class GeneralTreeTests: XCTestCase {
   }
 
   func test_insert_already_has_two_levels_sharing_root() {
-    let tree = GeneralTreeInt.empty.insert(.leaf(1)).insert(.leaf(2)).insert(.node(value: 1, .init(.leaf(3))))
+    let tree = GeneralTreeInt.empty
+      .insert(.leaf(1))
+      .insert(.leaf(2))
+      .insert(.node(value: 1, .init(.leaf(3))))
 
     XCTAssertEqual(
       tree,
