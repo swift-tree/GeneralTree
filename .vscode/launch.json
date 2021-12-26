@@ -1,0 +1,15 @@
+{
+    "configurations": [
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Test GeneralTree",
+            "program": "/Applications/Xcode.app/Contents/Developer/usr/bin/xctest",
+            "args": [
+                ".build/debug/GeneralTreePackageTests.xctest"
+            ],
+            "cwd": "${workspaceFolder:GeneralTree}",
+            "preLaunchTask": "swift: Build All"
+        }
+    ]
+}
