@@ -12,7 +12,7 @@ extension GeneralTree where Descendent == Forest<Element>, Element: Equatable {
       let forest = children.forest
       return .node(value: value, .init(forest))
     case (.node(value: _, let children), let .node(value: index, child)):
-      return children.forest[index].remove(at: child.next)
+      return children[index].remove(at: child.next)
     }
   }
 }
@@ -43,7 +43,7 @@ public extension GeneralTree where Descendent == Forest<Element>, Element: Equat
     case (.node(value: _, let children), let .node(value: lastIndex, .init(.empty))):
       return children.forest[lastIndex]
     case (.node(value: _, let children), let .node(value: index, child)):
-      return children.forest[index].find(at: child.next)
+      return children[index].find(at: child.next)
     }
   }
 

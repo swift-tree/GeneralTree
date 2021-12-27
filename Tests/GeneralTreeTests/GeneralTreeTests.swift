@@ -25,7 +25,7 @@ final class GeneralTreeTests: XCTestCase {
         super.tearDown()
     }
     
-    func test_sequence_append() {
+    func test_sequence_append_int() {
         let tree = GeneralTree<Array<Int>>.node(
             value: [1],
             .init([
@@ -35,6 +35,19 @@ final class GeneralTreeTests: XCTestCase {
         )
         
         XCTAssertEqual(tree.append(), [[1, 2, 22], [1, 2, 33], [1, 3, 4]])
+    }
+    
+    func test_sequence_append_string() {
+        let tree = GeneralTree<Array<String>>.node(
+            value: ["root"],
+            .init([
+                .node(value: ["first leaf"], .init(.node(value: ["first leaf, detail"], .noDescendent),
+                                                   .node(value: ["first leaf second detail"], .noDescendent))),
+                .node(value: ["second leaf", "second leaf detail"], .noDescendent)
+            ])
+        )
+        
+        XCTAssertEqual(tree.append(), [["root", "first leaf", "first leaf, detail"], ["root", "first leaf", "first leaf second detail"], ["root", "second leaf", "second leaf detail"]])
     }
     
     func test_init_paths() {

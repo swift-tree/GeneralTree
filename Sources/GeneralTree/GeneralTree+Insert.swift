@@ -22,7 +22,7 @@ public extension GeneralTree where Descendent == Forest<Element>, Element: Equat
           children.forest.append(Tree(path))
           return .node(value: .root, children)
         }
-        let updatedTree = children.forest[index].insert(path)
+        let updatedTree = children[index].insert(path)
         children.forest.remove(at: index)
         children.forest.insert(updatedTree, at: index)
         return .node(value: .root, children)
