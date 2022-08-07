@@ -27,6 +27,7 @@ public extension GeneralTree where Descendent == Forest<Element>, Element: Equat
         children.forest.insert(updatedTree, at: index)
         return .node(value: .root, children)
       case .node(value: firstInput, var children):
+        
         let subtree = Tree(path.next)
         children.forest.append(contentsOf: subtree == .empty ? [] : [subtree])
         return .node(value: firstInput, children)

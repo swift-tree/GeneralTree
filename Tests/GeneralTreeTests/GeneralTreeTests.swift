@@ -153,6 +153,45 @@ final class GeneralTreeTests: XCTestCase {
         )
     }
     
+    
+    func test_insert_already_has_two_levels_sharing_root5() {
+        let newTree = tree
+            .insert(.init([1, 3]))
+            .insert(.init([1, 2]))
+        
+        XCTAssertEqual(
+            newTree,
+            .node(
+                value: 1,
+                .init(
+                    .init([3]),
+                    .init([2])
+                )
+            )
+        )
+    }
+    
+    func test_insert_already_has_two_levels_sharing_root7() {
+        var newTree = tree.insert(.init([1, 2, 3]))
+   
+        newTree = newTree.insert(.init([1, 2, 3]))
+
+        XCTAssertEqual(
+            newTree,
+            .node(
+                value: 1,
+                .init(
+                    .node(
+                        value: 2,
+                        .init(
+                            .init([3])
+                        )
+                    )
+                )
+            )
+        )
+    }
+    
     func test_insert_already_has_two_levels_sharing_root4() {
         let newTree = GeneralTreeInt([1, 3])
             .insert(.init([2, 3]))
@@ -169,7 +208,7 @@ final class GeneralTreeTests: XCTestCase {
         )
     }
     
-    func test_insert_already_has_two_levels_sharing_root5() {
+    func test_insert_already_has_two_levels_sharing_root6() {
         tree.inserting(.init([1, 3]))
         tree.inserting(.init([2, 3]))
         
